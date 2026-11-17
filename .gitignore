@@ -21,3 +21,5 @@ Thumbs.db
 # Configuración local
 .idea/
 .vscode/
+# Reportes de Pytest
+reports/

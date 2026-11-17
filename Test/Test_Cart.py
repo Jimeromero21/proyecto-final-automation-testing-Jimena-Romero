@@ -3,14 +3,17 @@ from Page.PageInventory import PageInventory
 from Page.PageCart import PageCart
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from data.datos import datos_login
 
 
-def test_08_verificar_contador_carrito(driver):
-
-    driver.get("https://www.saucedemo.com/")
+def test_08_verificar_contador_carrito(driver, credenciales):
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+
+
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
@@ -29,12 +32,14 @@ def test_08_verificar_contador_carrito(driver):
     assert inventory.obtener_contador_carrito() == "1", \
         "ERROR: El contador del carrito no muestra 1"
 
-def test_09_navegar_carrito(driver):
+def test_09_navegar_carrito(driver, credenciales):
 
-    driver.get("https://www.saucedemo.com/")
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+
+    usuario, password = credenciales
+
+    login.iniciar_sesion(usuario, password)
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
@@ -55,12 +60,14 @@ def test_09_navegar_carrito(driver):
     assert cart.obtener_titulo() == "Your Cart", \
         "ERROR: No se ingresó correctamente al carrito"
 
-def test_10_comprobar_producto_en_el_carrito(driver):
-
-    driver.get("https://www.saucedemo.com/")
+def test_10_comprobar_producto_en_el_carrito(driver,credenciales):
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
+
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")

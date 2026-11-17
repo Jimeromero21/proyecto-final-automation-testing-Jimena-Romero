@@ -3,15 +3,18 @@ from Page.PageInventory import PageInventory
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from data.datos import datos_login
 
 
 
-def test_03_validar_titulo_pagina(driver):
-
-    driver.get("https://www.saucedemo.com/")
+def test_03_validar_titulo_pagina(driver, credenciales):
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+
+
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
@@ -24,12 +27,13 @@ def test_03_validar_titulo_pagina(driver):
     assert titulo == "Products", \
         f"ERROR: Titulo esperado: Products, obtenido: {titulo}"
 
-def test_04_productos_visibles(driver):
+def test_04_productos_visibles(driver, credenciales):
 
-    driver.get("https://www.saucedemo.com/")
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
@@ -45,13 +49,12 @@ def test_04_productos_visibles(driver):
     assert len(productos) > 0, \
         "ERROR: No se encontraron productos en el inventario"
 
-def test_05_validar_un_producto(driver):
-
-    driver.get("https://www.saucedemo.com/")
+def test_05_validar_un_producto(driver, credenciales):
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
-
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
     )
@@ -64,13 +67,13 @@ def test_05_validar_un_producto(driver):
 
     assert "Sauce Labs Backpack" in nombres, \
         "ERROR: No se encontró Sauce Labs Backpack"
-def test_06_validar_interfaz(driver):
+def test_06_validar_interfaz(driver, credenciales):
 
-    driver.get("https://www.saucedemo.com/")
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
-
+    usuario, password = credenciales
+    
+    login.iniciar_sesion(usuario, password)
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
     )
@@ -83,12 +86,13 @@ def test_06_validar_interfaz(driver):
     assert inventory.filtro_visible(), \
         "ERROR: El filtro de productos no está visible"
     
-def test_07_crear_item(driver):
-
-    driver.get("https://www.saucedemo.com/")
+def test_07_crear_item(driver, credenciales):
 
     login = PageLogin(driver)
-    login.iniciar_sesion("standard_user", "secret_sauce")
+
+    usuario, password = credenciales
+        
+    login.iniciar_sesion(usuario, password)
 
     WebDriverWait(driver, 10).until(
         EC.url_contains("/inventory.html")
