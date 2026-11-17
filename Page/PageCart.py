@@ -1,5 +1,7 @@
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class PageCart:
@@ -22,10 +24,11 @@ class PageCart:
         return self.driver.find_elements(*self.productos_carrito)
 
     def obtener_nombres_productos(self):
-        return self.driver.find_elements(*self.nombre_producto)
+        return [e.text for e in self.driver.find_elements(*self.nombre_producto)]
 
     def checkout_visible(self):
         return self.driver.find_element(*self.boton_checkout).is_displayed()
 
     def continuar_comprando(self):
         self.driver.find_element(*self.boton_continuar_comprando).click()
+        WebDriverWait(self.driver, 10).until(EC.url_contains("/inventory.html"))

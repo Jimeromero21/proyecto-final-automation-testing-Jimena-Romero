@@ -4,6 +4,12 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from config import BASE_URL
 from data.datos import datos_login
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from data.datos import datos_login
+from Page.PageLogin import PageLogin
+from Page.PageInventory import PageInventory
+
 
 
 @pytest.fixture
@@ -35,3 +41,10 @@ def driver():
 @pytest.fixture(params=datos_login)
 def credenciales(request):
     return request.param
+
+@pytest.fixture
+def inventory(driver, credenciales):
+    usuario, password = credenciales
+    PageLogin(driver).iniciar_sesion(usuario, password)
+    WebDriverWait(driver, 10).until(EC.url_contains("/inventory.html"))
+    return PageInventory(driver)

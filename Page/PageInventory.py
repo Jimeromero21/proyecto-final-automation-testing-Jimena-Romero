@@ -36,18 +36,34 @@ class PageInventory:
         return self.driver.find_element(*self.filtro_productos).is_displayed()
 
     def agregar_primer_producto(self):
-        
         producto = self.driver.find_elements(*self.productos)[0]
+        nombre = producto.find_element(*self.nombre_productos).text
         boton = producto.find_element(By.TAG_NAME, "button")
-        
+
         WebDriverWait(self.driver, 10).until(
-        EC.element_to_be_clickable(boton)
+            EC.element_to_be_clickable(boton)
         ).click()
+
+        return nombre
+
+    def ir_al_carrito(self):
+        self.driver.find_element(*self.carrito).click()
+        WebDriverWait(self.driver, 10).until(EC.url_contains("/cart.html"))
 
     def obtener_contador_carrito(self):
         return self.driver.find_element(*self.contador_carrito).text
 
-    def ir_al_carrito(self):
-        self.driver.find_element(*self.carrito).click()
 
-    
+    def quitar_primer_producto(self):
+        producto = self.driver.find_elements(*self.productos)[0]
+        boton = producto.find_element(By.TAG_NAME, "button")
+
+        WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(boton)
+        ).click()
+
+    def esperar_carrito_vacio(self):
+        # True si el contador desaparece (carrito vacío)
+        return WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element_located(self.contador_carrito)
+        )
