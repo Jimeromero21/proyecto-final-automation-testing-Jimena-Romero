@@ -216,3 +216,15 @@ API_TIMEOUT = 10
 | `ModuleNotFoundError: No module named 'api'` | Verificar que exista `api/__init__.py` y ejecutar desde la carpeta raíz del proyecto |
 | Pytest no detecta un archivo de tests | El nombre debe empezar con `test_` (no `tests_`) |
 | Fallo por tiempo de espera con `performance_glitch_user` | Es un usuario lento a propósito; aumentar el timeout de la espera |
+
+## Pruebas BDD (Behave)
+
+Los escenarios están escritos en Gherkin (español) en `features/` y reutilizan
+los Page Objects del proyecto.
+
+python -m behave                      # todos los escenarios
+python -m behave --tags=@smoke        # solo humo
+python -m behave --tags=@regression   # solo regresión
+
+Estructura: `features/*.feature` (escenarios), `features/steps/` (pasos) y
+`features/environment.py` (apertura y cierre del navegador).
