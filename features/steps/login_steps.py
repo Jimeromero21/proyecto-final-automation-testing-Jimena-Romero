@@ -1,6 +1,6 @@
 from behave import given, when, then
 
-from Page.PageLogin import PageLogin
+from page.PageLogin import PageLogin
 
 
 @given('que estoy en la página de login')

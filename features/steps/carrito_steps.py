@@ -1,7 +1,7 @@
 from behave import when, then
 
-from Page.PageInventory import PageInventory
-from Page.PageCart import PageCart
+from page.PageInventory import PageInventory
+from page.PageCart import PageCart
 
 
 @when('agrego el primer producto')

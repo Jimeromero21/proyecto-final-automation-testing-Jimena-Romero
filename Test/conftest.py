@@ -7,8 +7,8 @@ from data.datos import datos_login
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from data.datos import datos_login
-from Page.PageLogin import PageLogin
-from Page.PageInventory import PageInventory
+from page.PageLogin import PageLogin
+from page.PageInventory import PageInventory
 
 
 

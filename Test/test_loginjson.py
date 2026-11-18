@@ -5,7 +5,7 @@ import pytest
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Page.PageLogin import PageLogin
+from page.PageLogin import PageLogin
 
 RUTA_JSON = Path(__file__).resolve().parents[1] / "data" / "usuarios.json"
 

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from Page.PageLogin import PageLogin
+from page.PageLogin import PageLogin
 
 RUTA_CSV = Path(__file__).resolve().parent.parent / "data" / "usuarios.csv"
 

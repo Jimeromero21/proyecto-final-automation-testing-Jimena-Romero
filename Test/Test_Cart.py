@@ -1,4 +1,4 @@
-from Page.PageCart import PageCart
+from page.PageCart import PageCart
 
 
 def test_08_verificar_contador_carrito(inventory):
